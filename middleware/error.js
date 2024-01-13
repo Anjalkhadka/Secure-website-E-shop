@@ -5,7 +5,11 @@ module.exports = (err, req, res, next) => {
   err.message = err.message || "Internal server Error";
 
   // wrong mongodb id error
- 
+ const ErrorHandler = require("../utils/ErrorHandler");
+
+module.exports = (err, req, res, next) => {
+  err.statusCode = err.statusCode || 500;
+  err.message = err.message || "Internal server Error";
   // Duplicate key error
   if (err.code === 11000) {
     const message = `Duplicate key ${Object.keys(err.keyValue)} Entered`;
